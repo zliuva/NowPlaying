@@ -18,9 +18,9 @@
 		80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3FA1302C825002128B3 /* MainMenu.xib */; };
 		80A0B4041302C8C4002128B3 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B4031302C8C4002128B3 /* Icon.icns */; };
 		80C7EAD713047F7A008F0CFE /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C7EAD613047F7A008F0CFE /* Appirater.m */; };
-		80C7EAD913047FFE008F0CFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAD813047FFE008F0CFE /* LICENSE */; };
-		80C7EADB13048053008F0CFE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EADA13048053008F0CFE /* README */; };
 		80C7EADD13048429008F0CFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C7EADC13048429008F0CFE /* SystemConfiguration.framework */; };
+		80C7EAF11304871D008F0CFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAEF1304871D008F0CFE /* LICENSE */; };
+		80C7EAF21304871D008F0CFE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAF01304871D008F0CFE /* README */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,9 +45,9 @@
 		80A0B4031302C8C4002128B3 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		80C7EAD513047F7A008F0CFE /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		80C7EAD613047F7A008F0CFE /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		80C7EAD813047FFE008F0CFE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		80C7EADA13048053008F0CFE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		80C7EADC13048429008F0CFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		80C7EAEF1304871D008F0CFE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		80C7EAF01304871D008F0CFE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,14 +130,14 @@
 		80A0B3EC1302C824002128B3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80C7EAEF1304871D008F0CFE /* LICENSE */,
+				80C7EAF01304871D008F0CFE /* README */,
 				80A0B4031302C8C4002128B3 /* Icon.icns */,
 				80A0B3ED1302C824002128B3 /* NowPlaying-Info.plist */,
 				80A0B3EE1302C824002128B3 /* InfoPlist.strings */,
 				80A0B3F11302C824002128B3 /* NowPlaying-Prefix.pch */,
 				80A0B3F21302C824002128B3 /* main.m */,
 				80A0B3F41302C824002128B3 /* Credits.rtf */,
-				80C7EAD813047FFE008F0CFE /* LICENSE */,
-				80C7EADA13048053008F0CFE /* README */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -202,8 +202,8 @@
 				80A0B3F61302C824002128B3 /* Credits.rtf in Resources */,
 				80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */,
 				80A0B4041302C8C4002128B3 /* Icon.icns in Resources */,
-				80C7EAD913047FFE008F0CFE /* LICENSE in Resources */,
-				80C7EADB13048053008F0CFE /* README in Resources */,
+				80C7EAF11304871D008F0CFE /* LICENSE in Resources */,
+				80C7EAF21304871D008F0CFE /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
