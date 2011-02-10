@@ -7,28 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		802C55F913030F8B00D601A9 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802C55F813030F8B00D601A9 /* ScriptingBridge.framework */; };
+		803957F01304246400C0CD17 /* TrackInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 803957EF1304246400C0CD17 /* TrackInfoView.m */; };
+		808FD9081302F0BC00F9948D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808FD9071302F0BC00F9948D /* QuartzCore.framework */; };
 		80A0B3E61302C824002128B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A0B3E51302C824002128B3 /* Cocoa.framework */; };
 		80A0B3F01302C824002128B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3EE1302C824002128B3 /* InfoPlist.strings */; };
 		80A0B3F31302C824002128B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0B3F21302C824002128B3 /* main.m */; };
 		80A0B3F61302C824002128B3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3F41302C824002128B3 /* Credits.rtf */; };
 		80A0B3F91302C824002128B3 /* NowPlayingAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0B3F81302C824002128B3 /* NowPlayingAppDelegate.m */; };
 		80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3FA1302C825002128B3 /* MainMenu.xib */; };
+		80A0B4041302C8C4002128B3 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B4031302C8C4002128B3 /* Icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		802C55F613030F7D00D601A9 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		802C55F813030F8B00D601A9 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		803957EE1304246400C0CD17 /* TrackInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackInfoView.h; sourceTree = "<group>"; };
+		803957EF1304246400C0CD17 /* TrackInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoView.m; sourceTree = "<group>"; };
+		808FD9071302F0BC00F9948D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		80A0B3E11302C824002128B3 /* NowPlaying.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowPlaying.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A0B3E51302C824002128B3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		80A0B3E81302C824002128B3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		80A0B3E91302C824002128B3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		80A0B3EA1302C824002128B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		80A0B3ED1302C824002128B3 /* NowPlaying-Info.plist */ = {isa = PBXFileReference; path = "NowPlaying-Info.plist"; sourceTree = "<group>"; };
+		80A0B3ED1302C824002128B3 /* NowPlaying-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NowPlaying-Info.plist"; sourceTree = "<group>"; };
 		80A0B3EF1302C824002128B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		80A0B3F11302C824002128B3 /* NowPlaying-Prefix.pch */ = {isa = PBXFileReference; path = "NowPlaying-Prefix.pch"; sourceTree = "<group>"; };
+		80A0B3F11302C824002128B3 /* NowPlaying-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NowPlaying-Prefix.pch"; sourceTree = "<group>"; };
 		80A0B3F21302C824002128B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80A0B3F51302C824002128B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		80A0B3F71302C824002128B3 /* NowPlayingAppDelegate.h */ = {isa = PBXFileReference; path = NowPlayingAppDelegate.h; sourceTree = "<group>"; };
+		80A0B3F71302C824002128B3 /* NowPlayingAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingAppDelegate.h; sourceTree = "<group>"; };
 		80A0B3F81302C824002128B3 /* NowPlayingAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingAppDelegate.m; sourceTree = "<group>"; };
 		80A0B3FB1302C825002128B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		80A0B4031302C8C4002128B3 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				802C55F913030F8B00D601A9 /* ScriptingBridge.framework in Frameworks */,
+				808FD9081302F0BC00F9948D /* QuartzCore.framework in Frameworks */,
 				80A0B3E61302C824002128B3 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		803957EC1304242F00C0CD17 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				803957EE1304246400C0CD17 /* TrackInfoView.h */,
+				803957EF1304246400C0CD17 /* TrackInfoView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		80A0B3D61302C824002128B3 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				80A0B3E51302C824002128B3 /* Cocoa.framework */,
+				808FD9071302F0BC00F9948D /* QuartzCore.framework */,
+				802C55F813030F8B00D601A9 /* ScriptingBridge.framework */,
 				80A0B3E71302C824002128B3 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -82,6 +105,8 @@
 		80A0B3EB1302C824002128B3 /* NowPlaying */ = {
 			isa = PBXGroup;
 			children = (
+				803957EC1304242F00C0CD17 /* UI */,
+				802C55F613030F7D00D601A9 /* iTunes.h */,
 				80A0B3F71302C824002128B3 /* NowPlayingAppDelegate.h */,
 				80A0B3F81302C824002128B3 /* NowPlayingAppDelegate.m */,
 				80A0B3FA1302C825002128B3 /* MainMenu.xib */,
@@ -93,6 +118,7 @@
 		80A0B3EC1302C824002128B3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80A0B4031302C8C4002128B3 /* Icon.icns */,
 				80A0B3ED1302C824002128B3 /* NowPlaying-Info.plist */,
 				80A0B3EE1302C824002128B3 /* InfoPlist.strings */,
 				80A0B3F11302C824002128B3 /* NowPlaying-Prefix.pch */,
@@ -152,6 +178,7 @@
 				80A0B3F01302C824002128B3 /* InfoPlist.strings in Resources */,
 				80A0B3F61302C824002128B3 /* Credits.rtf in Resources */,
 				80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */,
+				80A0B4041302C8C4002128B3 /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +191,7 @@
 			files = (
 				80A0B3F31302C824002128B3 /* main.m in Sources */,
 				80A0B3F91302C824002128B3 /* NowPlayingAppDelegate.m in Sources */,
+				803957F01304246400C0CD17 /* TrackInfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +305,7 @@
 				80A0B4011302C825002128B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,13 +8,282 @@
 
 #import "NowPlayingAppDelegate.h"
 
+#import "iTunes.h"
+
+#import "TrackInfoView.h"
+
+#define SYSTEM_STATUS_BAR_HEIGHT ([[NSStatusBar systemStatusBar] thickness])
+#define UPDATE_INTERVAL .3f
+
+@interface NowPlayingAppDelegate(PRIVATE)
+
+- (void)addStatusItem;
+
+- (BOOL)checkiTunesPlaying;
+- (void)updateTrack;
+- (void)updatePlayerState;
+
+- (void)loadPreferences;
+- (BOOL)isLoginItem;
+- (void)setLoginItem:(BOOL)shouldBeLoginItem;
+
+@end
+
 @implementation NowPlayingAppDelegate
 
-@synthesize window;
+@synthesize statusItem;
+@synthesize trackInfoView;
+@synthesize selfIcon;
+@synthesize iTunesApp;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-	// Insert code here to initialize your application
+#pragma mark -
+#pragma mark IBActions
+
+- (IBAction)rate:(id)sender {
+	if (!iTunesApp.isRunning) {
+		return;
+	}
+
+	iTunesApp.currentTrack.rating = ((NSMenuItem *) sender).tag * 20;
+}
+
+- (IBAction)play:(id)sender {
+	[iTunesApp playpause];
+}
+
+- (IBAction)previous:(id)sender {
+	[iTunesApp previousTrack];
+}
+
+- (IBAction)next:(id)sender {
+	[iTunesApp nextTrack];
+}
+
+- (IBAction)toggleDisplayOption:(id)sender {
+	((NSMenuItem *) sender).state = !((NSMenuItem *) sender).state;
+	[self updateTrack];
+}
+
+- (IBAction)toggleOpenAtLogin:(id)sender {
+	openAtLoginMenuItem.state = !openAtLoginMenuItem.state;
+	[self setLoginItem:openAtLoginMenuItem.state];
+}
+
+#pragma mark -
+#pragma mark Login Item Settings
+
+- (BOOL)isLoginItem {
+	NSMutableArray *loginItems = (NSMutableArray *)CFPreferencesCopyValue((CFStringRef)@"AutoLaunchedApplicationDictionary",
+																		  (CFStringRef)@"loginwindow",
+																		  kCFPreferencesCurrentUser,
+																		  kCFPreferencesAnyHost); 	
+	for (NSDictionary *dict in loginItems) {
+		if ([[dict objectForKey:@"Path"] isEqualToString:[[NSBundle mainBundle] bundlePath]]) {
+			CFRelease(loginItems);
+			return YES;
+		}
+	}
+	
+	CFRelease(loginItems);
+	return NO;
+}
+
+- (void)setLoginItem:(BOOL)shouldBeLoginItem {
+	NSMutableArray *loginItems = (NSMutableArray *)CFPreferencesCopyValue((CFStringRef)@"AutoLaunchedApplicationDictionary",
+																		  (CFStringRef)@"loginwindow",
+																		  kCFPreferencesCurrentUser,
+																		  kCFPreferencesAnyHost); 
+	//loginItems = [[loginItems autorelease] mutableCopy]; 
+	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"Hide", [[NSBundle mainBundle] bundlePath], @"Path", nil];
+	
+	[loginItems removeObject:dict]; //make sure it's not already in there
+	if (shouldBeLoginItem) {
+		[loginItems addObject:dict];
+	}
+	
+	CFPreferencesSetValue((CFStringRef)@"AutoLaunchedApplicationDictionary",
+						  loginItems,
+						  (CFStringRef)@"loginwindow",
+						  kCFPreferencesCurrentUser,
+						  kCFPreferencesAnyHost);
+	
+	CFPreferencesSynchronize((CFStringRef)@"loginwindow", 
+							 kCFPreferencesCurrentUser, 
+							 kCFPreferencesAnyHost );
+	CFRelease(loginItems);
+}
+
+#pragma mark -
+
+- (void)loadPreferences {
+	NSDictionary *defaults = [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithBool:YES], @"ShowArtwork",
+							  [NSNumber numberWithBool:YES], @"ShowArtist",
+							  [NSNumber numberWithBool:YES], @"ShowDuration",
+							  nil];
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+	
+	showArtworkMenuItem.state = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowArtwork"];
+	showArtistMenuItem.state = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowArtist"];
+	showDurationMenuItem.state = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowDuration"];
+	
+	openAtLoginMenuItem.state = [self isLoginItem];
+}
+
+- (void)addStatusItem {
+	self.selfIcon = [NSImage imageNamed:@"Icon.icns"];
+	selfIcon.scalesWhenResized = YES;
+	selfIcon.size = NSMakeSize(SYSTEM_STATUS_BAR_HEIGHT, SYSTEM_STATUS_BAR_HEIGHT);
+	
+	self.trackInfoView = [[TrackInfoView alloc] initWithFrame:NSMakeRect(0, 0, SYSTEM_STATUS_BAR_HEIGHT, SYSTEM_STATUS_BAR_HEIGHT)];
+	
+	self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+	statusItem.view = trackInfoView;
+	statusItem.menu = mainMenu;
+	statusItem.menu.delegate = trackInfoView;
+	
+	//trackInfoView.menu = mainMenu;
+	trackInfoView.statusItem = statusItem;
+	
+	trackInfoView.artworkView.image = selfIcon;
+}
+
+#pragma mark -
+#pragma mark iTunes monitoring
+
+- (BOOL)checkiTunesPlaying {
+	if (!iTunesApp.isRunning ||
+		iTunesApp.playerState == iTunesEPlSStopped ||
+		iTunesApp.playerState == iTunesEPlSPaused) {
+		
+		trackInfoView.artworkView.image = selfIcon;
+		[trackInfoView.titleField setStringValue:@""];
+		[trackInfoView.durationField setStringValue:@""];
+		
+		[ratingMenuItem setEnabled:NO];
+		playMenuItem.title = @"Play";
+		
+		return NO;
+	} else {
+		[ratingMenuItem setEnabled:YES];
+		playMenuItem.title = @"Pause";
+	}
+	
+	return YES;
+}
+
+- (void)updateTrack {
+	if (![self checkiTunesPlaying]) {
+		return;
+	}
+	
+	NSString *name = iTunesApp.currentTrack.name;
+	NSString *artist = iTunesApp.currentTrack.artist;
+	NSString *title;
+	
+	if (showArtistMenuItem.state && artist.length > 0) {
+		title = [NSString stringWithFormat:@"%@ - %@", artist, name];
+	} else {
+		title = name;
+	}
+	
+	[trackInfoView.titleField setStringValue:title];
+	
+	if (showArtworkMenuItem.state) {
+		NSArray *artworks = iTunesApp.currentTrack.artworks;
+		if (artworks && artworks.count >= 1) {
+			iTunesArtwork *artwork = [artworks objectAtIndex:0];
+			NSImage *image = [artwork data];
+			[image setScalesWhenResized:YES];
+			[image setSize:NSMakeSize(SYSTEM_STATUS_BAR_HEIGHT, SYSTEM_STATUS_BAR_HEIGHT)];
+			
+			trackInfoView.artworkView.image = image;
+		}
+	} else {
+		trackInfoView.artworkView.image = nil;
+	}
+	
+	for (NSMenuItem *item in ratingMenuItem.submenu.itemArray) {
+		item.state = (item.tag == iTunesApp.currentTrack.rating / 20);
+	}
+}
+
+- (void)updatePlayerState {
+	if (![self checkiTunesPlaying]) {
+		return;
+	}
+	
+	NSInteger position = iTunesApp.playerPosition;
+	NSString *duration = showDurationMenuItem.state ? [NSString stringWithFormat:@"(%02d:%02d)", position / 60, position % 60] : @"";
+	[trackInfoView.durationField setStringValue:duration];
+}
+
+- (void)handleiTunesNotification:(NSNotification *)aNotification {
+	[self updateTrack];
+	[self updatePlayerState];
+}
+
+- (void)handleTimer:(NSTimer *)aTimer {
+	[self updatePlayerState];
+}
+
+#pragma mark -
+#pragma mark IBActions
+
+- (IBAction)showAbout:(id)sender {
+	[NSApp activateIgnoringOtherApps:YES];
+	[NSApp orderFrontStandardAboutPanel:nil];
+}
+
+#pragma mark -
+#pragma mark NSApplicationDelegate
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	[self addStatusItem];
+	[self loadPreferences];
+	
+	self.iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+	
+	[[NSDistributedNotificationCenter defaultCenter] addObserver:self
+														selector:@selector(handleiTunesNotification:)
+															name:@"com.apple.iTunes.playerInfo"
+														  object:nil];
+	
+	[self updateTrack];
+	
+	[NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(handleTimer:) userInfo:nil repeats:YES];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification {
+	[[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+	NSAlert *alert = [NSAlert alertWithMessageText:@"NowPlaying for Mac is already running"
+									 defaultButton:@"OK"
+								   alternateButton:nil
+									   otherButton:nil
+						 informativeTextWithFormat:@"NowPlaying for Mac is already running in the background.\nYou can access it from the status bar.\nYou can safely remove the dock icon if you wish to."];
+	[alert runModal];
+	
+	return NO;
+}
+
+#pragma mark -
+#pragma mark Memory Management
+
+- (void)dealloc {
+	[[NSDistributedNotificationCenter defaultCenter] removeObserver:self];
+	
+	[statusItem release];
+	[trackInfoView release];
+
+	[selfIcon release];
+	
+	[iTunesApp release];
+	
+	[super dealloc];
 }
 
 @end
