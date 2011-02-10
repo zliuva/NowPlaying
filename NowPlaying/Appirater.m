@@ -124,12 +124,12 @@ NSString *templateReviewURLIpad = @"itms-apps://ax.itunes.apple.com/WebObjects/M
 		return NO;
 	
 	// check if the app has been used enough
-	NSInteger useCount = [userDefaults integerForKey:kAppiraterUseCount];
+	int useCount = [userDefaults integerForKey:kAppiraterUseCount];
 	if (useCount <= APPIRATER_USES_UNTIL_PROMPT)
 		return NO;
 	
 	// check if the user has done enough significant events
-	NSInteger sigEventCount = [userDefaults integerForKey:kAppiraterSignificantEventCount];
+	int sigEventCount = [userDefaults integerForKey:kAppiraterSignificantEventCount];
 	if (sigEventCount <= APPIRATER_SIG_EVENTS_UNTIL_PROMPT)
 		return NO;
 	
@@ -178,11 +178,11 @@ NSString *templateReviewURLIpad = @"itms-apps://ax.itunes.apple.com/WebObjects/M
 		}
 		
 		// increment the use count
-		NSInteger useCount = [userDefaults integerForKey:kAppiraterUseCount];
+		int useCount = [userDefaults integerForKey:kAppiraterUseCount];
 		useCount++;
 		[userDefaults setInteger:useCount forKey:kAppiraterUseCount];
 		if (APPIRATER_DEBUG)
-			NSLog(@"APPIRATER Use count: %ld", useCount);
+			NSLog(@"APPIRATER Use count: %d", useCount);
 	}
 	else
 	{
@@ -226,11 +226,11 @@ NSString *templateReviewURLIpad = @"itms-apps://ax.itunes.apple.com/WebObjects/M
 		}
 		
 		// increment the significant event count
-		NSInteger sigEventCount = [userDefaults integerForKey:kAppiraterSignificantEventCount];
+		int sigEventCount = [userDefaults integerForKey:kAppiraterSignificantEventCount];
 		sigEventCount++;
 		[userDefaults setInteger:sigEventCount forKey:kAppiraterSignificantEventCount];
 		if (APPIRATER_DEBUG)
-			NSLog(@"APPIRATER Significant event count: %ld", sigEventCount);
+			NSLog(@"APPIRATER Significant event count: %d", sigEventCount);
 	}
 	else
 	{

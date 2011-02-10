@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		802C55F913030F8B00D601A9 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802C55F813030F8B00D601A9 /* ScriptingBridge.framework */; };
 		803957F01304246400C0CD17 /* TrackInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 803957EF1304246400C0CD17 /* TrackInfoView.m */; };
+		80755F4E130488DF00ED09A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 80755F4D130488DF00ED09A8 /* README.md */; };
 		808FD9081302F0BC00F9948D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808FD9071302F0BC00F9948D /* QuartzCore.framework */; };
 		80A0B3E61302C824002128B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A0B3E51302C824002128B3 /* Cocoa.framework */; };
 		80A0B3F01302C824002128B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3EE1302C824002128B3 /* InfoPlist.strings */; };
@@ -20,7 +21,6 @@
 		80C7EAD713047F7A008F0CFE /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C7EAD613047F7A008F0CFE /* Appirater.m */; };
 		80C7EADD13048429008F0CFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C7EADC13048429008F0CFE /* SystemConfiguration.framework */; };
 		80C7EAF11304871D008F0CFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAEF1304871D008F0CFE /* LICENSE */; };
-		80C7EAF21304871D008F0CFE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAF01304871D008F0CFE /* README */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +28,7 @@
 		802C55F813030F8B00D601A9 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		803957EE1304246400C0CD17 /* TrackInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackInfoView.h; sourceTree = "<group>"; };
 		803957EF1304246400C0CD17 /* TrackInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoView.m; sourceTree = "<group>"; };
+		80755F4D130488DF00ED09A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		808FD9071302F0BC00F9948D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		80A0B3E11302C824002128B3 /* NowPlaying.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowPlaying.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A0B3E51302C824002128B3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -47,7 +48,6 @@
 		80C7EAD613047F7A008F0CFE /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		80C7EADC13048429008F0CFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		80C7EAEF1304871D008F0CFE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
-		80C7EAF01304871D008F0CFE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +130,8 @@
 		80A0B3EC1302C824002128B3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80755F4D130488DF00ED09A8 /* README.md */,
 				80C7EAEF1304871D008F0CFE /* LICENSE */,
-				80C7EAF01304871D008F0CFE /* README */,
 				80A0B4031302C8C4002128B3 /* Icon.icns */,
 				80A0B3ED1302C824002128B3 /* NowPlaying-Info.plist */,
 				80A0B3EE1302C824002128B3 /* InfoPlist.strings */,
@@ -203,7 +203,7 @@
 				80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */,
 				80A0B4041302C8C4002128B3 /* Icon.icns in Resources */,
 				80C7EAF11304871D008F0CFE /* LICENSE in Resources */,
-				80C7EAF21304871D008F0CFE /* README in Resources */,
+				80755F4E130488DF00ED09A8 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
