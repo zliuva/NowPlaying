@@ -17,6 +17,10 @@
 		80A0B3F91302C824002128B3 /* NowPlayingAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0B3F81302C824002128B3 /* NowPlayingAppDelegate.m */; };
 		80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3FA1302C825002128B3 /* MainMenu.xib */; };
 		80A0B4041302C8C4002128B3 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B4031302C8C4002128B3 /* Icon.icns */; };
+		80C7EAD713047F7A008F0CFE /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C7EAD613047F7A008F0CFE /* Appirater.m */; };
+		80C7EAD913047FFE008F0CFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAD813047FFE008F0CFE /* LICENSE */; };
+		80C7EADB13048053008F0CFE /* README in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EADA13048053008F0CFE /* README */; };
+		80C7EADD13048429008F0CFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C7EADC13048429008F0CFE /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,11 @@
 		80A0B3F81302C824002128B3 /* NowPlayingAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NowPlayingAppDelegate.m; sourceTree = "<group>"; };
 		80A0B3FB1302C825002128B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		80A0B4031302C8C4002128B3 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		80C7EAD513047F7A008F0CFE /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		80C7EAD613047F7A008F0CFE /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		80C7EAD813047FFE008F0CFE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		80C7EADA13048053008F0CFE /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		80C7EADC13048429008F0CFE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C7EADD13048429008F0CFE /* SystemConfiguration.framework in Frameworks */,
 				802C55F913030F8B00D601A9 /* ScriptingBridge.framework in Frameworks */,
 				808FD9081302F0BC00F9948D /* QuartzCore.framework in Frameworks */,
 				80A0B3E61302C824002128B3 /* Cocoa.framework in Frameworks */,
@@ -87,6 +97,7 @@
 				80A0B3E51302C824002128B3 /* Cocoa.framework */,
 				808FD9071302F0BC00F9948D /* QuartzCore.framework */,
 				802C55F813030F8B00D601A9 /* ScriptingBridge.framework */,
+				80C7EADC13048429008F0CFE /* SystemConfiguration.framework */,
 				80A0B3E71302C824002128B3 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -105,6 +116,7 @@
 		80A0B3EB1302C824002128B3 /* NowPlaying */ = {
 			isa = PBXGroup;
 			children = (
+				80C7EAD313047F61008F0CFE /* Appirater */,
 				803957EC1304242F00C0CD17 /* UI */,
 				802C55F613030F7D00D601A9 /* iTunes.h */,
 				80A0B3F71302C824002128B3 /* NowPlayingAppDelegate.h */,
@@ -124,8 +136,19 @@
 				80A0B3F11302C824002128B3 /* NowPlaying-Prefix.pch */,
 				80A0B3F21302C824002128B3 /* main.m */,
 				80A0B3F41302C824002128B3 /* Credits.rtf */,
+				80C7EAD813047FFE008F0CFE /* LICENSE */,
+				80C7EADA13048053008F0CFE /* README */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80C7EAD313047F61008F0CFE /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				80C7EAD513047F7A008F0CFE /* Appirater.h */,
+				80C7EAD613047F7A008F0CFE /* Appirater.m */,
+			);
+			name = Appirater;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +202,8 @@
 				80A0B3F61302C824002128B3 /* Credits.rtf in Resources */,
 				80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */,
 				80A0B4041302C8C4002128B3 /* Icon.icns in Resources */,
+				80C7EAD913047FFE008F0CFE /* LICENSE in Resources */,
+				80C7EADB13048053008F0CFE /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +217,7 @@
 				80A0B3F31302C824002128B3 /* main.m in Sources */,
 				80A0B3F91302C824002128B3 /* NowPlayingAppDelegate.m in Sources */,
 				803957F01304246400C0CD17 /* TrackInfoView.m in Sources */,
+				80C7EAD713047F7A008F0CFE /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
