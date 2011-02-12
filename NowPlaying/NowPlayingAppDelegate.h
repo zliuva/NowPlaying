@@ -44,6 +44,10 @@
 	NSImage *selfIcon;
 	
 	iTunesApplication *iTunesApp;
+	
+	NSTimer *updateTimer;
+	
+	BOOL playerPaused;
 }
 
 @property (nonatomic, retain) NSStatusItem *statusItem;

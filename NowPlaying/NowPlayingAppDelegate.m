@@ -32,11 +32,16 @@
 
 - (void)addStatusItem;
 
-- (BOOL)checkiTunesPlaying;
 - (void)updateTrack;
 - (void)updatePlayerState;
 
+- (void)setTimer;
+- (void)installTimer;
+- (void)removeTimer;
+
 - (void)loadPreferences;
+- (void)savePreference;
+
 - (BOOL)isLoginItem;
 - (void)setLoginItem:(BOOL)shouldBeLoginItem;
 
@@ -74,7 +79,14 @@
 
 - (IBAction)toggleDisplayOption:(id)sender {
 	((NSMenuItem *) sender).state = !((NSMenuItem *) sender).state;
+	[self savePreference];
+	
+	if (sender == showDurationMenuItem) {
+		[self setTimer];
+	}
+	
 	[self updateTrack];
+	[self updatePlayerState];
 }
 
 - (IBAction)toggleOpenAtLogin:(id)sender {
@@ -144,6 +156,12 @@
 	openAtLoginMenuItem.state = [self isLoginItem];
 }
 
+- (void)savePreference {
+	[[NSUserDefaults standardUserDefaults] setBool:showArtworkMenuItem.state forKey:@"ShowArtwork"];
+	[[NSUserDefaults standardUserDefaults] setBool:showArtistMenuItem.state forKey:@"ShowArtist"];
+	[[NSUserDefaults standardUserDefaults] setBool:showDurationMenuItem.state forKey:@"ShowDuration"];
+}
+
 - (void)addStatusItem {
 	self.selfIcon = [NSImage imageNamed:@"Icon.icns"];
 	selfIcon.scalesWhenResized = YES;
@@ -165,29 +183,8 @@
 #pragma mark -
 #pragma mark iTunes monitoring
 
-- (BOOL)checkiTunesPlaying {
-	if (!iTunesApp.isRunning ||
-		iTunesApp.playerState == iTunesEPlSStopped ||
-		iTunesApp.playerState == iTunesEPlSPaused) {
-		
-		trackInfoView.artworkView.image = selfIcon;
-		[trackInfoView.titleField setStringValue:@""];
-		[trackInfoView.durationField setStringValue:@""];
-		
-		[ratingMenuItem setEnabled:NO];
-		playMenuItem.title = @"Play";
-		
-		return NO;
-	} else {
-		[ratingMenuItem setEnabled:YES];
-		playMenuItem.title = @"Pause";
-	}
-	
-	return YES;
-}
-
 - (void)updateTrack {
-	if (![self checkiTunesPlaying]) {
+	if (playerPaused) {
 		return;
 	}
 	
@@ -223,22 +220,67 @@
 }
 
 - (void)updatePlayerState {
-	if (![self checkiTunesPlaying]) {
+	if (playerPaused) {
 		return;
 	}
 	
-	NSInteger position = iTunesApp.playerPosition;
-	NSString *duration = showDurationMenuItem.state ? [NSString stringWithFormat:@"(%02d:%02d)", position / 60, position % 60] : @"";
-	[trackInfoView.durationField setStringValue:duration];
+	if (showDurationMenuItem.state) {
+		NSInteger position = iTunesApp.playerPosition;
+		NSString *duration = showDurationMenuItem.state ? [NSString stringWithFormat:@"(%02d:%02d)", position / 60, position % 60] : @"";
+		[trackInfoView.durationField setStringValue:duration];
+	} else {
+		[trackInfoView.durationField setStringValue:@""];
+	}
 }
 
 - (void)handleiTunesNotification:(NSNotification *)aNotification {
-	[self updateTrack];
-	[self updatePlayerState];
+	NSString *playerState = [aNotification.userInfo objectForKey:@"Player State"];
+	NSLog(@"%@", playerState);
+	if (playerState &&
+		[playerState isEqualToString:@"Stopped"] || [playerState isEqualToString:@"Paused"]) {
+		
+		playerPaused = YES;
+		[self setTimer];
+		
+		trackInfoView.artworkView.image = selfIcon;
+		[trackInfoView.titleField setStringValue:@""];
+		[trackInfoView.durationField setStringValue:@""];
+		
+		[ratingMenuItem setEnabled:NO];
+		playMenuItem.title = @"Play";
+	} else {
+		playerPaused = NO;
+		[self setTimer];
+		
+		[ratingMenuItem setEnabled:YES];
+		playMenuItem.title = @"Pause";
+	
+		[self updateTrack];
+		[self updatePlayerState];
+	}
 }
 
 - (void)handleTimer:(NSTimer *)aTimer {
 	[self updatePlayerState];
+}
+
+- (void)setTimer {
+	if (!playerPaused && showDurationMenuItem.state) {
+		if (!updateTimer) {
+			[self installTimer];
+		}
+	} else {
+		[self removeTimer];
+	}
+}
+
+- (void)installTimer {
+	updateTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(handleTimer:) userInfo:nil repeats:YES];
+}
+
+- (void)removeTimer {
+	[updateTimer invalidate];
+	updateTimer = nil;
 }
 
 #pragma mark -
@@ -263,9 +305,10 @@
 															name:@"com.apple.iTunes.playerInfo"
 														  object:nil];
 	
-	[self updateTrack];
+	playerPaused = !iTunesApp.isRunning || iTunesApp.playerState == iTunesEPlSStopped || iTunesApp.playerState == iTunesEPlSPaused;
 	
-	[NSTimer scheduledTimerWithTimeInterval:UPDATE_INTERVAL target:self selector:@selector(handleTimer:) userInfo:nil repeats:YES];
+	[self updateTrack];
+	[self updatePlayerState];
 	
 	[Appirater appLaunched:YES];
 }
@@ -297,6 +340,8 @@
 	[selfIcon release];
 	
 	[iTunesApp release];
+	
+	[updateTimer invalidate];
 	
 	[super dealloc];
 }

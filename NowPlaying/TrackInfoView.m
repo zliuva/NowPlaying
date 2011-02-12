@@ -203,6 +203,14 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
 	[statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuShowing];
+	
+	if (isMenuShowing) {
+		durationField.textColor = [NSColor highlightColor];
+		titleField.textColor = [NSColor highlightColor];
+	} else {
+		durationField.textColor = [NSColor textColor];
+		titleField.textColor = [NSColor textColor];
+	}
 }
 
 - (void)mouseDown:(NSEvent *)event {
