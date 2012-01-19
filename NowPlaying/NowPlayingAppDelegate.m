@@ -204,11 +204,16 @@
 		NSArray *artworks = iTunesApp.currentTrack.artworks;
 		if (artworks && artworks.count >= 1) {
 			iTunesArtwork *artwork = [artworks objectAtIndex:0];
-			NSImage *image = [artwork data];
+			NSImage *image = [[NSImage alloc] initWithData:[artwork rawData]];
 			[image setScalesWhenResized:YES];
 			[image setSize:NSMakeSize(SYSTEM_STATUS_BAR_HEIGHT, SYSTEM_STATUS_BAR_HEIGHT)];
 			
 			trackInfoView.artworkView.image = image;
+			[image release];
+			
+			NSBitmapImageRep *imgRep = [[image representations] objectAtIndex:0];
+			NSData *data = [imgRep representationUsingType:NSPNGFileType properties: nil];
+			[data writeToFile: @"/Users/final/test.png" atomically:YES];
 		}
 	} else {
 		trackInfoView.artworkView.image = nil;
@@ -237,7 +242,7 @@
 	NSString *playerState = [aNotification.userInfo objectForKey:@"Player State"];
 	NSLog(@"%@", playerState);
 	if (playerState &&
-		[playerState isEqualToString:@"Stopped"] || [playerState isEqualToString:@"Paused"]) {
+		([playerState isEqualToString:@"Stopped"] || [playerState isEqualToString:@"Paused"])) {
 		
 		playerPaused = YES;
 		[self setTimer];

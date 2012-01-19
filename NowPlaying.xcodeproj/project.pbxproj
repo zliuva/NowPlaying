@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		802C55F913030F8B00D601A9 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802C55F813030F8B00D601A9 /* ScriptingBridge.framework */; };
 		803957F01304246400C0CD17 /* TrackInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 803957EF1304246400C0CD17 /* TrackInfoView.m */; };
-		80755F4E130488DF00ED09A8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 80755F4D130488DF00ED09A8 /* README.md */; };
 		808FD9081302F0BC00F9948D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808FD9071302F0BC00F9948D /* QuartzCore.framework */; };
 		80A0B3E61302C824002128B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80A0B3E51302C824002128B3 /* Cocoa.framework */; };
 		80A0B3F01302C824002128B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B3EE1302C824002128B3 /* InfoPlist.strings */; };
@@ -20,7 +19,6 @@
 		80A0B4041302C8C4002128B3 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 80A0B4031302C8C4002128B3 /* Icon.icns */; };
 		80C7EAD713047F7A008F0CFE /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C7EAD613047F7A008F0CFE /* Appirater.m */; };
 		80C7EADD13048429008F0CFE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C7EADC13048429008F0CFE /* SystemConfiguration.framework */; };
-		80C7EAF11304871D008F0CFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 80C7EAEF1304871D008F0CFE /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +174,9 @@
 /* Begin PBXProject section */
 		80A0B3D81302C824002128B3 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 80A0B3DB1302C824002128B3 /* Build configuration list for PBXProject "NowPlaying" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -202,8 +203,6 @@
 				80A0B3F61302C824002128B3 /* Credits.rtf in Resources */,
 				80A0B3FC1302C825002128B3 /* MainMenu.xib in Resources */,
 				80A0B4041302C8C4002128B3 /* Icon.icns in Resources */,
-				80C7EAF11304871D008F0CFE /* LICENSE in Resources */,
-				80755F4E130488DF00ED09A8 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +254,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -272,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -286,6 +287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -301,7 +303,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Liu Zhengyang";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -309,6 +311,7 @@
 				GCC_PREFIX_HEADER = "NowPlaying/NowPlaying-Prefix.pch";
 				INFOPLIST_FILE = "NowPlaying/NowPlaying-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
