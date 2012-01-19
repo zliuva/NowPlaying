@@ -27,6 +27,7 @@
 		803957EE1304246400C0CD17 /* TrackInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackInfoView.h; sourceTree = "<group>"; };
 		803957EF1304246400C0CD17 /* TrackInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackInfoView.m; sourceTree = "<group>"; };
 		80755F4D130488DF00ED09A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		807B48C714C8A47200DCEED3 /* NowPlaying.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NowPlaying.entitlements; sourceTree = "<group>"; };
 		808FD9071302F0BC00F9948D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		80A0B3E11302C824002128B3 /* NowPlaying.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowPlaying.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A0B3E51302C824002128B3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -114,6 +115,7 @@
 		80A0B3EB1302C824002128B3 /* NowPlaying */ = {
 			isa = PBXGroup;
 			children = (
+				807B48C714C8A47200DCEED3 /* NowPlaying.entitlements */,
 				80C7EAD313047F61008F0CFE /* Appirater */,
 				803957EC1304242F00C0CD17 /* UI */,
 				802C55F613030F7D00D601A9 /* iTunes.h */,
@@ -272,13 +274,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Liu Zhengyang";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PROVISIONING_PROFILE = "C505F09B-4E48-42E3-BC66-3F83CA3343A6";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -287,6 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = NowPlaying/NowPlaying.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -303,7 +307,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_ENTITLEMENTS = NowPlaying/NowPlaying.entitlements;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Liu Zhengyang";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -311,7 +316,7 @@
 				GCC_PREFIX_HEADER = "NowPlaying/NowPlaying-Prefix.pch";
 				INFOPLIST_FILE = "NowPlaying/NowPlaying-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C505F09B-4E48-42E3-BC66-3F83CA3343A6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
